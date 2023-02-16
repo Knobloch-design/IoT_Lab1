@@ -162,6 +162,12 @@ int main()
 
                 fflush(stdout);
                 displayTimer = now;//HINT: LEAVE THIS LINE ALONE!!!
+
+                if (ind = 9){
+                    ind = 0;
+                }else{
+                    ind++;
+                }
             }
 
             //  update rate every second
