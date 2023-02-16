@@ -79,6 +79,15 @@ int main()
 
     //  now just process data
 
+    RTFLOAT[10] roll10;
+    RTFLOAT[10] roll10;
+    RTFLOAT[10] yaw10;
+    RTFLOAT[10] temp10;
+    RTFLOAT[10] humidity10;
+    RTFLOAT[10] pressure10;
+    int ind = 0;
+
+
     while (1) 
 	{
 		/* HINT: The whole purpose of the weird way this is written is to poll the 
@@ -123,6 +132,20 @@ int main()
 			{ 
 				
                 printf("Sample rate %d: %s\n", sampleRate, RTMath::displayDegrees("", imuData.fusionPose));
+                roll10[ind] = imuData.fusionPose.x() * RTMATH_RAD_TO_DEGREE;
+                pitch10[ind] = imuData.fusionPose.y() * RTMATH_RAD_TO_DEGREE;
+                yaw10[ind] = imuData.fusionPose.z() * RTMATH_RAD_TO_DEGREE;
+                if(roll10 != NULL){
+                    RTFLOAT avgRoll = 0.0;
+                    RTFLOAT avgPitch = 0.0;
+                    RTFLOAT avgYaw = 0.0;
+                    for( int i = 0; i < 10; ++i){
+                        avgRoll += roll10[i];
+                        avgPitch += pitch10[i];
+                        avgYaw += yaw10[i];
+                    }
+                    printf("Avrages for Roll: %4.1f, Pitch: %4.1f, Yaw: %4.1f", avgRoll/10.0, avgPitch/10.0, avgYaw/10.0);
+                }
 
                 if (pressure != NULL) 
 				{
